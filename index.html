@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validacion de elementos de formulario</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1 class="header-main">VALIDACION DE ELEMENTOS DE FORMULARIO</h1>
+  </header>
+
+  <main class="main-container">
+    <form action="loquesea.html" method="post" name="formulariovalidacion" id="reg-form">
+      
+      <section>
+        <h2>DATOS ALUMNO:</h2>
+        <input type="text" name="nombre" id="nombrecompleto" class="input-field" placeholder="Nombre completo">
+        <input type="email" name="email" id="email" class="input-field" placeholder="Correo electrónico">
+      </section>
+
+      <section>
+        <h2>ACTIVIDADES EXTRAESCOLARES</h2>
+        <div class="form-group-wrapper">
+          <input type="checkbox" name="deporte" class="actividades" value="DEPORTE"><label class="label-text">Deporte (Fútbol, Béisbol, Básquetbol, Voleibol)</label><br>
+          <input type="checkbox" name="club" class="actividades" value="CLUB"><label class="label-text">Club de Programación</label><br>
+          <input type="checkbox" name="capitulo" class="actividades" value="CAPITULO"><label class="label-text">Capítulo de Sistemas</label>
+        </div>
+      </section>
+
+      <section>
+        <h2>DOMINIO DEL IDIOMA INGLÉS:</h2>
+        <div class="form-group-wrapper">
+          <input type="radio" name="idioma" class="idioma_ingles" value="AVANZADO"><label class="label-text">Avanzado</label><br>
+          <input type="radio" name="idioma" class="idioma_ingles" value="INTERMEDIO"><label class="label-text">Intermedio</label><br>
+          <input type="radio" name="idioma" class="idioma_ingles" value="BASICO"><label class="label-text">Básico</label>
+        </div>
+      </section>
+
+      <section>
+        <h2>UNIDADES:</h2>
+        <div class="form-group-wrapper">
+          <select name="opciones" id="unidades" class="input-field">
+            <option value="" selected>Selecciona una opción</option>
+            <option value="unidad1">Unidad 1</option>
+            <option value="unidad2">Unidad 2</option>
+            <option value="unidad3">Unidad 3</option>
+            <option value="proyecto final">Proyecto Final</option>
+          </select>
+          <div style="margin-top: 20px;">
+            <button type="button" id="btn_validar" class="action-submit">Validar Elementos</button>
+          </div>
+        </div>
+      </section>
+
+    </form>
+  </main>
+
+  <script>
+    $(document).ready(function() {
+      $("#btn_validar").on("click", function() {
+        if ($("#nombrecompleto").val().trim() === '') {
+          alert("Error: El campo NOMBRE es obligatorio");
+          $("#nombrecompleto").first().focus();
+          return false;
+        }
+
+        if ($("#email").val().trim() === '') {
+          alert("Error: El campo EMAIL no puede estar vacío");
+          $("#email").focus();
+          return false;
+        }
+
+        if (!$(".actividades").is(":checked")) {
+          alert("Atención: Selecciona al menos una ACTIVIDAD");
+          return false;
+        }
+
+        if (!$(".idioma_ingles").is(":checked")) {
+          alert("Atención: Indica tu nivel de INGLÉS");
+          return false;
+        }
+
+        if ($("#unidades").val() === '') {
+          alert('Error: Debes elegir una UNIDAD del listado');
+          return false;
+        } else {
+          $("#reg-form").submit();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
